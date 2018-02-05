@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mnecas.helpinghand.register">
+
+    <Button
+        android:id="@+id/reg_button"
+        android:layout_width="216dp"
+        android:layout_height="43dp"
+        android:layout_below="@+id/reg_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Register"
+        app:layout_constraintTop_toBottomOf="@+id/reg_password"
+        tools:layout_editor_absoluteX="84dp" />
+
+    <EditText
+        android:id="@+id/reg_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/reg_button"
+        android:layout_alignLeft="@+id/reg_button"
+        android:layout_alignRight="@+id/reg_button"
+        android:layout_alignStart="@+id/reg_button"
+        android:layout_below="@+id/reg_email"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/reg_email"
+        tools:layout_editor_absoluteX="85dp" />
+
+    <EditText
+        android:id="@+id/reg_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/reg_email"
+        android:layout_alignLeft="@+id/reg_button"
+        android:layout_alignRight="@+id/reg_email"
+        android:layout_alignStart="@+id/reg_button"
+        android:layout_marginTop="38dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/reg_email"
+        tools:layout_editor_absoluteX="85dp" />
+
+    <EditText
+        android:id="@+id/reg_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/reg_password"
+        android:layout_alignLeft="@+id/reg_password"
+        android:layout_alignRight="@+id/reg_password"
+        android:layout_alignStart="@+id/reg_password"
+        android:layout_below="@+id/reg_username"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="108dp" />
+
+    <TextView
+        android:id="@+id/log_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reg_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="Already registred! Login Me."
+        app:layout_constraintEnd_toEndOf="@+id/reg_button"
+        app:layout_constraintStart_toStartOf="@+id/reg_button"
+        tools:layout_editor_absoluteY="322dp" />
+
+</RelativeLayout>
