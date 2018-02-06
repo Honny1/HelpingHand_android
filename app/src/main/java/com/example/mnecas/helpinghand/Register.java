@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 import java.util.Map;
 
-public class register extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class register extends AppCompatActivity {
         reg_textview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(v.getContext(),MainActivity.class);
+                Intent intent = new Intent(v.getContext(),Login.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
@@ -56,7 +56,7 @@ public class register extends AppCompatActivity {
                 map.put("password",reg_password.getText().toString());
 
                 ConnectToServer cnt=new ConnectToServer(getApplicationContext());
-                cnt.postResponse("http://192.168.2.148:8000/api/register",map,reg_callback);
+                cnt.postResponse("http://192.168.2.148:8000/api/Register",map,reg_callback);
 
             }
         });

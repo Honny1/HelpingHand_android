@@ -1,49 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@color/colorToolbar"/>
 
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="216dp"
-        android:layout_height="43dp"
-        android:layout_alignEnd="@+id/login_password"
-        android:layout_alignRight="@+id/login_password"
-        android:layout_below="@+id/login_password"
-        android:layout_marginTop="26dp"
-        android:text="LOGIN" />
-
-    <EditText
-        android:id="@+id/login_password"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_username"
-        android:layout_centerHorizontal="true"
-        android:hint="Password"
-        android:ems="10"
-        android:inputType="textPassword" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar" />
 
-    <EditText
-        android:id="@+id/login_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/login_password"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/login_password"
-        android:layout_marginTop="64dp"
-        android:hint="Username"
-        android:ems="10"
-        android:inputType="textPersonName" />
 
-    <TextView
-        android:id="@+id/reg_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/login_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:text="Not a member? Sign up now." />
 </RelativeLayout>
