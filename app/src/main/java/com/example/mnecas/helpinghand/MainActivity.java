@@ -2,22 +2,14 @@ package com.example.mnecas.helpinghand;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
@@ -45,7 +37,7 @@ public class MainActivity extends AppCompatActivity{
         toolbar=(Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListAdapter listAdapter = new CustomListViewAdapter(this,web);
+        ListAdapter listAdapter = new MainListViewAdapter(this,web);
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -53,7 +45,9 @@ public class MainActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(),""+parent.getId(),Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(),""+view.getId(),Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(),ConfigPopup.class));
+                Intent popup = new Intent(getApplicationContext(),ConfigPopup.class);
+                popup.putExtra("somesting","something");
+                startActivity(popup);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
             }

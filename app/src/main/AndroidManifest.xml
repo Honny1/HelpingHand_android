@@ -28,6 +28,9 @@
         <activity
             android:name=".ConfigPopup"
             android:theme="@style/AppTheme.ConfigWindowTheme" />
+        <activity
+            android:name=".AddConfigPopup"
+            android:theme="@style/AppTheme.ConfigWindowTheme" />
     </application>
 
 </manifest>
