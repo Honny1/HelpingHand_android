@@ -1,6 +1,7 @@
 package com.example.mnecas.helpinghand;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,15 +32,19 @@ public class MainActivity extends AppCompatActivity {
             JSONObject response = new JSONObject(intent.getStringExtra("response"));
             //String pageName = response.getJSONObject("pageInfo").getString("pageName");
             final JSONArray device_array = response.getJSONArray("device");
+
             for (int i = 0; i < device_array.length(); i++) {
                 lights.add(device_array.getJSONObject(i).getString("name"));
             }
-
+            SharedPreferences.Editor editor = getSharedPreferences("", MODE_PRIVATE).edit();
+            editor.putString("name", "Elena");
+            editor.putInt("idName", 12);
+            editor.apply();
 
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            ListAdapter listAdapter = new MainListViewAdapter(this, lights);
+            ListAdapter listAdapter = new MainListViewAdapter(this, lights,device_array);
             ListView listView = (ListView) findViewById(R.id.list_view);
             listView.setAdapter(listAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
