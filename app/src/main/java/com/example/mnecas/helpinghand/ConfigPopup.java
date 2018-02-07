@@ -7,9 +7,16 @@ import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by mnecas on 6.2.18.
@@ -17,21 +24,8 @@ import android.widget.Toast;
 
 public class ConfigPopup extends Activity{
 
-    String[] web = {
-            "Google Plus",
-            "Twitter",
-            "Windows",
-            "Bing",
-            "Itunes",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Drupal"
-    } ;
+
+    ArrayList<String> configs = new ArrayList<String>();
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,23 +35,42 @@ public class ConfigPopup extends Activity{
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int height=dm.heightPixels;
         int widht=dm.widthPixels;
-        getWindow().setLayout((int) (widht*.8),(int) (height*.4));
+        getWindow().setLayout((int) (widht*.85),(int) (height*.45));
 
-        ListAdapter listAdapter = new ConfigListViewAdapter(this,web);
+        final Intent intent=getIntent();
+        try {
+            JSONArray response = new JSONArray(intent.getStringExtra("config_response"));
+            EditText light_textview = (EditText) findViewById(R.id.light_textview);
+            light_textview.setText(intent.getStringExtra("device_name"));
+            for (int i=0;i<response.length();i++){
+                configs.add(response.getJSONObject(i).getString("name"));
+            }
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+        }
+        ListAdapter listAdapter = new ConfigListViewAdapter(this,configs);
         ListView listView = (ListView) findViewById(R.id.config_listview);
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),""+parent.getId(),Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),""+view.getId(),Toast.LENGTH_SHORT).show();
                 Intent popup = new Intent(getApplicationContext(),AddConfigPopup.class);
-                popup.putExtra("somesting","something");
+                try {
+                    JSONArray response = new JSONArray(intent.getStringExtra("config_response"));
+                    popup.putExtra("config_settings",response.getJSONObject(position).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 startActivity(popup);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
             }
         });
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
 }

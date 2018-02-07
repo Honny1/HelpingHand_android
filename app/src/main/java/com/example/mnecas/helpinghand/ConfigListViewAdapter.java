@@ -10,8 +10,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class ConfigListViewAdapter extends ArrayAdapter{
-    public ConfigListViewAdapter(Context context, String[] lights) {
+    public ConfigListViewAdapter(Context context, ArrayList<String> lights) {
         super(context, R.layout.main_listitem,lights);
 
     }

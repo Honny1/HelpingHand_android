@@ -10,8 +10,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class MainListViewAdapter extends ArrayAdapter{
-    public MainListViewAdapter(Context context, String[] lights) {
+    public MainListViewAdapter(Context context, ArrayList<String> lights) {
         super(context, R.layout.main_listitem,lights);
 
     }

@@ -12,53 +12,65 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity{
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
-    String[] web = {
-            "Google Plus",
-            "Twitter",
-            "Windows",
-            "Bing",
-            "Itunes",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Wordpress",
-            "Drupal"
-    } ;
+    ArrayList<String> lights = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        toolbar=(Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ListAdapter listAdapter = new MainListViewAdapter(this,web);
-        ListView listView = (ListView) findViewById(R.id.list_view);
-        listView.setAdapter(listAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),""+parent.getId(),Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),""+view.getId(),Toast.LENGTH_SHORT).show();
-                Intent popup = new Intent(getApplicationContext(),ConfigPopup.class);
-                popup.putExtra("somesting","something");
-                startActivity(popup);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
+        Intent intent = getIntent();
+        try {
+            JSONObject response = new JSONObject(intent.getStringExtra("response"));
+            //String pageName = response.getJSONObject("pageInfo").getString("pageName");
+            final JSONArray device_array = response.getJSONArray("device");
+            for (int i = 0; i < device_array.length(); i++) {
+                lights.add(device_array.getJSONObject(i).getString("name"));
             }
-        });
 
+
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            ListAdapter listAdapter = new MainListViewAdapter(this, lights);
+            ListView listView = (ListView) findViewById(R.id.list_view);
+            listView.setAdapter(listAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent popup = new Intent(getApplicationContext(), ConfigPopup.class);
+                    try {
+                        popup.putExtra("config_response", device_array.getJSONObject(position).getJSONArray("configuration").toString());
+                        popup.putExtra("device_name", device_array.getJSONObject(position).getString("name"));
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                    startActivity(popup);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+                }
+            });
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_items,menu);
+        menuInflater.inflate(R.menu.menu_items, menu);
         return true;
     }
 
