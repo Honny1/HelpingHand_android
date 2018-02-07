@@ -1,5 +1,6 @@
-package com.example.mnecas.helpinghand;
+package com.example.mnecas.helpinghand.Main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,10 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.mnecas.helpinghand.My_classes.ConnectToServer;
+import com.example.mnecas.helpinghand.My_classes.VolleyCallback;
+import com.example.mnecas.helpinghand.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressLint("Registered")
 public class Register extends AppCompatActivity {
 
     @Override
@@ -31,7 +36,7 @@ public class Register extends AppCompatActivity {
         reg_textview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(v.getContext(),Login.class);
+                Intent intent = new Intent(v.getContext(), Login.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 

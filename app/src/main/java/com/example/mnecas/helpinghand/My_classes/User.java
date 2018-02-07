@@ -1,4 +1,4 @@
-package com.example.mnecas.helpinghand;
+package com.example.mnecas.helpinghand.My_classes;
 
 /**
  * Created by mnecas on 5.2.18.

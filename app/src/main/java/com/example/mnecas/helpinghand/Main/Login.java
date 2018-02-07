@@ -1,5 +1,6 @@
-package com.example.mnecas.helpinghand;
+package com.example.mnecas.helpinghand.Main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -12,11 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.mnecas.helpinghand.Main.MainActivity;
+import com.example.mnecas.helpinghand.Main.Register;
+import com.example.mnecas.helpinghand.My_classes.ConnectToServer;
+import com.example.mnecas.helpinghand.My_classes.VolleyCallback;
+import com.example.mnecas.helpinghand.R;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressLint("Registered")
 public class Login extends AppCompatActivity {
     View regView;
     View mLoadingView;

@@ -1,4 +1,4 @@
-package com.example.mnecas.helpinghand;
+package com.example.mnecas.helpinghand.secound_popup;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +14,8 @@ import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.mnecas.helpinghand.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

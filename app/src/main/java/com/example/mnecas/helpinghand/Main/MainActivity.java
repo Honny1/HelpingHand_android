@@ -1,5 +1,6 @@
-package com.example.mnecas.helpinghand;
+package com.example.mnecas.helpinghand.Main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,12 +14,17 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.mnecas.helpinghand.Adapters.MainListViewAdapter;
+import com.example.mnecas.helpinghand.R;
+import com.example.mnecas.helpinghand.first_popup.ConfigPopup;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+@SuppressLint("Registered")
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     ArrayList<String> lights = new ArrayList<String>();

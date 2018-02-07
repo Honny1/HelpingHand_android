@@ -1,4 +1,4 @@
-package com.example.mnecas.helpinghand;
+package com.example.mnecas.helpinghand.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.mnecas.helpinghand.R;
 
 import java.util.ArrayList;
 

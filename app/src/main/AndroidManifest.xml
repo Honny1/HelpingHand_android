@@ -13,23 +13,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
+        <activity android:name=".Main.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register" />
+        <activity android:name=".Main.Register" />
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main2"
+            android:name=".Main.MainActivity"
+            android:label= "Helping Hand"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ConfigPopup"
+            android:name=".first_popup.ConfigPopup"
             android:theme="@style/AppTheme.ConfigWindowTheme" />
         <activity
-            android:name=".AddConfigPopup"
+            android:name=".secound_popup.AddConfigPopup"
             android:theme="@style/AppTheme.ConfigWindowTheme" />
     </application>
 

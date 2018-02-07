@@ -1,9 +1,8 @@
-package com.example.mnecas.helpinghand;
+package com.example.mnecas.helpinghand.My_classes;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
 import com.android.volley.Cache;
 import com.android.volley.Network;
 import com.android.volley.Request;
@@ -16,10 +15,10 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mnecas.helpinghand.My_classes.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
