@@ -1,4 +1,4 @@
-package com.example.mnecas.helpinghand.first_popup;
+package com.example.mnecas.helpinghand.popups;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,11 +14,9 @@ import android.widget.Toast;
 
 import com.example.mnecas.helpinghand.Adapters.ConfigListViewAdapter;
 import com.example.mnecas.helpinghand.R;
-import com.example.mnecas.helpinghand.secound_popup.AddConfigPopup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 

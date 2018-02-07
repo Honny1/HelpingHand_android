@@ -26,10 +26,10 @@
             android:label= "Helping Hand"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".first_popup.ConfigPopup"
+            android:name=".popups.ConfigPopup"
             android:theme="@style/AppTheme.ConfigWindowTheme" />
         <activity
-            android:name=".secound_popup.AddConfigPopup"
+            android:name=".popups.AddConfigPopup"
             android:theme="@style/AppTheme.ConfigWindowTheme" />
     </application>
 

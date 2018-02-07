@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.mnecas.helpinghand.Adapters.MainListViewAdapter;
 import com.example.mnecas.helpinghand.R;
-import com.example.mnecas.helpinghand.first_popup.ConfigPopup;
+import com.example.mnecas.helpinghand.popups.ConfigPopup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
