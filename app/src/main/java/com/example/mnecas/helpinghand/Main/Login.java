@@ -2,6 +2,7 @@ package com.example.mnecas.helpinghand.Main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -46,8 +47,13 @@ public class Login extends AppCompatActivity {
                         if (Objects.equals(response, "error")) {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         } else {
+                            SharedPreferences.Editor editor = getSharedPreferences("user_info", MODE_PRIVATE).edit();
+                            editor.putString("name",login_username.getText().toString() );
+                            editor.apply();
+
                             Intent intent = new Intent(v.getContext(), MainActivity.class);
-                            intent.putExtra("response",response);
+                            intent.putExtra("response_json",response);
+                            intent.putExtra("username",login_username.getText().toString() );
                             startActivity(intent);
                             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                         }

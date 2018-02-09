@@ -57,7 +57,7 @@ public class Register extends AppCompatActivity {
                 };
                 Map<String, String> map= new HashMap<String, String>();
                 map.put("email",reg_email.getText().toString());
-                map.put("username",reg_username.getText().toString());
+                map.put("useuserrname",reg_username.getText().toString());
                 map.put("password",reg_password.getText().toString());
 
                 ConnectToServer cnt=new ConnectToServer(getApplicationContext());
