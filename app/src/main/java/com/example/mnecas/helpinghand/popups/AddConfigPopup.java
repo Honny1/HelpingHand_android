@@ -1,14 +1,16 @@
 package com.example.mnecas.helpinghand.popups;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.text.UnicodeSetSpanner;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
 import android.widget.Switch;
@@ -38,8 +40,6 @@ public class AddConfigPopup extends Activity {
     Switch aSwitch;
     NumberPicker hours;
     NumberPicker minutes;
-    CheckBox checkBox;
-    ArrayList<CheckBox> checkBoxes;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +49,9 @@ public class AddConfigPopup extends Activity {
         int height = dm.heightPixels;
         int widht = dm.widthPixels;
 
-        getWindow().setLayout((int) (widht * .85), (int) (height * .45));
+        getWindow().setLayout((int) (widht * .85), (int) (height * .55));
 
-        HashMap<String, Integer> checkboxes = new HashMap<String, Integer>();
+        final HashMap<String, Integer> checkboxes = new HashMap<String, Integer>();
         checkboxes.put("Monday", R.id.checkBox1);
         checkboxes.put("Tuesday", R.id.checkBox2);
         checkboxes.put("Wednesday", R.id.checkBox3);
@@ -60,8 +60,17 @@ public class AddConfigPopup extends Activity {
         checkboxes.put("Saturday", R.id.checkBox6);
         checkboxes.put("Sunday", R.id.checkBox7);
 
+        @SuppressLint("UseSparseArrays") final HashMap<Integer, String> days_names = new HashMap<>();
+        days_names.put(0, "Monday");
+        days_names.put(1, "Tuesday");
+        days_names.put(2, "Wednesday");
+        days_names.put(3, "Thursday");
+        days_names.put(4, "Friday");
+        days_names.put(5, "Saturday");
+        days_names.put(6, "Sunday");
+
         final Intent intent = getIntent();
-        checkBoxes = new ArrayList<CheckBox>();
+        final ArrayList<CheckBox> checkBoxes = new ArrayList<CheckBox>();
         try {
             JSONObject config = new JSONObject(intent.getStringExtra("config_settings"));
             JSONArray days = config.getJSONArray("day");
@@ -88,17 +97,61 @@ public class AddConfigPopup extends Activity {
         } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
+
+
+        Button save_btn = (Button) findViewById(R.id.save_btn2);
+        save_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                VolleyCallback mResultCallback = new VolleyCallback() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void notifySuccess(String response) {
+                        if (Objects.equals(response, "error")) {
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        } else {
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void notifyError(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                };
+
+                Intent intent = getIntent();
+                String config_id = intent.getStringExtra("config_id");
+                Map<String, String> map = new HashMap<String, String>();
+                SharedPreferences prefs = getSharedPreferences("user_info", MODE_PRIVATE);
+                String name = prefs.getString("name", "");
+                String device_id = prefs.getString("device_id", "");
+                map.put("username", name);
+                map.put("device_id", "" + device_id);
+                map.put("config_id", "" + config_id);
+                map.put("state", "" + aSwitch.isChecked());
+                map.put("hours", "" + hours.getValue());
+                map.put("minutes", "" + minutes.getValue());
+                for (int i = 0; i < 7; i++) {
+                    CheckBox checkBox = (CheckBox) findViewById(checkboxes.get(days_names.get(i)));
+                    map.put(checkBox.getText().toString(), "" + checkBox.isChecked());
+                }
+                map.put("config_name", config_name.getText().toString());
+                ConnectToServer cnt = new ConnectToServer(getApplicationContext());
+                cnt.postResponse("http://192.168.2.148:8000/api/configSave", map, mResultCallback);
+            }
+        });
+
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    public void delete_config(View view) {
         VolleyCallback mResultCallback = new VolleyCallback() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void notifySuccess(String response) {
                 if (Objects.equals(response, "error")) {
                     Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                } else {
+                    finish();
                 }
             }
 
@@ -107,25 +160,12 @@ public class AddConfigPopup extends Activity {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         };
+
         Intent intent = getIntent();
-
-        String config_id = intent.getStringExtra("device_id");
+        String config_id = intent.getStringExtra("config_id");
         Map<String, String> map = new HashMap<String, String>();
-        SharedPreferences prefs = getSharedPreferences("user_info", MODE_PRIVATE);
-        String name = prefs.getString("name", "");
-        String device_id = prefs.getString("device_id", "");
-        map.put("username", name);
-        map.put("device_id", device_id);
         map.put("config_id", "" + config_id);
-        map.put("state", "" + aSwitch.isChecked());
-        map.put("hours", "" + hours.getValue());
-        map.put("minutes", "" + minutes.getValue());
-        for (int i = 0; i < checkBoxes.size(); i++) {
-            map.put("checkBoxes" + i, "" + checkBoxes.get(i).isChecked());
-        }
-        map.put("config_name", config_name.getText().toString());
-
         ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-        cnt.postResponse("http://192.168.2.148:8000/api/configSave", map, mResultCallback);
+        cnt.postResponse("http://192.168.2.148:8000/api/delConfig", map, mResultCallback);
     }
 }

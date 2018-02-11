@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -48,7 +49,7 @@ public class ConfigPopup extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int height = dm.heightPixels;
         int widht = dm.widthPixels;
-        getWindow().setLayout((int) (widht * .85), (int) (height * .45));
+        getWindow().setLayout((int) (widht * .85), (int) (height * .55));
 
         final Intent intent = getIntent();
         try {
@@ -75,29 +76,56 @@ public class ConfigPopup extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                finish();
                 startActivity(popup);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                finish();
 
+            }
+        });
+
+        Button save_button = (Button) findViewById(R.id.save_btn_2);
+        save_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                VolleyCallback mResultCallback = new VolleyCallback() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void notifySuccess(String response) {
+                        if (Objects.equals(response, "error")) {
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        } else {
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void notifyError(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                };
+                Map<String, String> map = new HashMap<String, String>();
+                SharedPreferences prefs = getSharedPreferences("user_info", MODE_PRIVATE);
+
+                String name = prefs.getString("name", "");
+                String device_id = prefs.getString("device_id", "");
+                map.put("username", name);
+                map.put("device_id", device_id);
+                map.put("light_name", light_textview.getText().toString());
+                ConnectToServer cnt = new ConnectToServer(getApplicationContext());
+                cnt.postResponse("http://192.168.2.148:8000/api/deviceSave", map, mResultCallback);
             }
         });
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void add(View v) {
         VolleyCallback mResultCallback = new VolleyCallback() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void notifySuccess(String response) {
                 if (Objects.equals(response, "error")) {
                     Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                } else {
+                    finish();
                 }
             }
 
@@ -106,15 +134,14 @@ public class ConfigPopup extends Activity {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         };
+
         Map<String, String> map = new HashMap<String, String>();
         SharedPreferences prefs = getSharedPreferences("user_info", MODE_PRIVATE);
-
-        String name = prefs.getString("name", "");
         String device_id = prefs.getString("device_id", "");
-        map.put("username", name);
-        map.put("device_id", device_id);
-        map.put("light_name", light_textview.getText().toString());
+        map.put("device_id", "" + device_id);
         ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-        cnt.postResponse("http://192.168.2.148:8000/api/deviceSave", map, mResultCallback);
+        cnt.postResponse("http://192.168.2.148:8000/api/addConfig", map, mResultCallback);
     }
+
+
 }

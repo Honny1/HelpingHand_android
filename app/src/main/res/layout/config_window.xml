@@ -22,8 +22,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_toLeftOf="@+id/save_btn_2"
+        android:layout_toStartOf="@+id/save_btn_2"
+        android:onClick="add"
         android:text="+" />
 
     <EditText
@@ -36,4 +39,13 @@
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/save_btn_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="Save" />
 </RelativeLayout>

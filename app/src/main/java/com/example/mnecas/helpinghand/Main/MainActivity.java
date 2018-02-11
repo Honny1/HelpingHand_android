@@ -102,17 +102,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         };
-        try {
-            Thread.sleep(3000);
-            Map<String, String> map = new HashMap<String, String>();
-            Intent intent = getIntent();
-            String user = intent.getStringExtra("username");
-            map.put("username", user);
-            ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-            cnt.postResponse("http://192.168.2.148:8000/api/userInfo", map, mResultCallback);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        Map<String, String> map = new HashMap<String, String>();
+        Intent intent = getIntent();
+        String user = intent.getStringExtra("username");
+        map.put("username", user);
+        ConnectToServer cnt = new ConnectToServer(getApplicationContext());
+        cnt.postResponse("http://192.168.2.148:8000/api/userInfo", map, mResultCallback);
 
 
     }

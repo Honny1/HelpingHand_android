@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/checkBox3"
-        android:text="Tuesday" />
+        android:text="Thursday" />
 
     <CheckBox
         android:id="@+id/checkBox3"
@@ -67,7 +67,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/checkBox1"
-        android:text="Thursday" />
+        android:text="Tuesday" />
 
     <NumberPicker
         android:id="@+id/hours"
@@ -90,9 +90,9 @@
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/checkBox6"
-        android:layout_alignRight="@+id/checkBox6"
-        android:layout_below="@+id/checkBox7"
+        android:layout_alignEnd="@+id/checkBox1"
+        android:layout_alignRight="@+id/checkBox1"
+        android:layout_below="@+id/hours"
         android:text="Light" />
 
     <EditText
@@ -107,5 +107,25 @@
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName" />
+
+
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/save_btn2"
+        android:layout_toStartOf="@+id/save_btn2"
+        android:onClick="delete_config"
+        android:text="delete" />
+
+    <Button
+        android:id="@+id/save_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="save" />
 
 </RelativeLayout>
