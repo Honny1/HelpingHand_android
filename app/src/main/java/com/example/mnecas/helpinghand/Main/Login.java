@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity {
                 map.put("password", login_password.getText().toString());
 
                 ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-                cnt.postResponse("http://192.168.2.148:8000/api/login", map, mResultCallback);
+                cnt.postResponse("/api/login", map, mResultCallback);
 
             }
         });

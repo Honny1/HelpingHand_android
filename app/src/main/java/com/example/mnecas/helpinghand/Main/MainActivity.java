@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         String user = intent.getStringExtra("username");
         map.put("username", user);
         ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-        cnt.postResponse("http://192.168.2.148:8000/api/userInfo", map, mResultCallback);
+        cnt.postResponse("/api/userInfo", map, mResultCallback);
 
 
     }

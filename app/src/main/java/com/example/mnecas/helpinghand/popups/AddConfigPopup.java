@@ -137,7 +137,7 @@ public class AddConfigPopup extends Activity {
                 }
                 map.put("config_name", config_name.getText().toString());
                 ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-                cnt.postResponse("http://192.168.2.148:8000/api/configSave", map, mResultCallback);
+                cnt.postResponse("/api/configSave", map, mResultCallback);
             }
         });
 
@@ -166,6 +166,6 @@ public class AddConfigPopup extends Activity {
         Map<String, String> map = new HashMap<String, String>();
         map.put("config_id", "" + config_id);
         ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-        cnt.postResponse("http://192.168.2.148:8000/api/delConfig", map, mResultCallback);
+        cnt.postResponse("/api/delConfig", map, mResultCallback);
     }
 }

@@ -2,6 +2,7 @@ package com.example.mnecas.helpinghand.My_classes;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -36,7 +37,7 @@ public class ConnectToServer extends AppCompatActivity {
     public Map<String, String> map;
 
     public ConnectToServer(Context context) {
-        this.url = "";
+        this.url = "http://192.168.212.174:8000";
         map= new HashMap<String, String>();
         this.my_response = "";
         this.mContext = context;
@@ -44,6 +45,7 @@ public class ConnectToServer extends AppCompatActivity {
     }
 
     private void execute(final VolleyCallback callbac) {
+        Log.w("URL",this.url);
         RequestQueue queue = Volley.newRequestQueue(this.mContext);
         queue.start();
         StringRequest stringRequest = new StringRequest(this.method, this.url,
@@ -67,14 +69,14 @@ public class ConnectToServer extends AppCompatActivity {
     }
 
     public void getResponse(String url, final VolleyCallback callbac) {
-        this.url = url;
+        this.url += url;
         this.method = Request.Method.GET;
         this.execute(callbac);
     }
 
 
     public void postResponse(String url, Map map, final VolleyCallback callbac) {
-        this.url = url;
+        this.url += url;
         this.method = Request.Method.POST;
         this.map = map;
         this.execute(callbac);

@@ -111,7 +111,7 @@ public class ConfigPopup extends Activity {
                 map.put("device_id", device_id);
                 map.put("light_name", light_textview.getText().toString());
                 ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-                cnt.postResponse("http://192.168.2.148:8000/api/deviceSave", map, mResultCallback);
+                cnt.postResponse("/api/deviceSave", map, mResultCallback);
             }
         });
 
@@ -140,7 +140,7 @@ public class ConfigPopup extends Activity {
         String device_id = prefs.getString("device_id", "");
         map.put("device_id", "" + device_id);
         ConnectToServer cnt = new ConnectToServer(getApplicationContext());
-        cnt.postResponse("http://192.168.2.148:8000/api/addConfig", map, mResultCallback);
+        cnt.postResponse("/api/addConfig", map, mResultCallback);
     }
 
 
