@@ -37,7 +37,7 @@ public class ConnectToServer extends AppCompatActivity {
     public Map<String, String> map;
 
     public ConnectToServer(Context context) {
-        this.url = "http://192.168.212.174:8000";
+        this.url = "http://192.168.2.109:8000";
         map= new HashMap<String, String>();
         this.my_response = "";
         this.mContext = context;
@@ -70,6 +70,12 @@ public class ConnectToServer extends AppCompatActivity {
 
     public void getResponse(String url, final VolleyCallback callbac) {
         this.url += url;
+        this.method = Request.Method.GET;
+        this.execute(callbac);
+    }
+
+    public void getResponseFullURL(String url, final VolleyCallback callbac) {
+        this.url = url;
         this.method = Request.Method.GET;
         this.execute(callbac);
     }

@@ -67,12 +67,12 @@ public class MainListViewAdapter extends ArrayAdapter {
 
                         @Override
                         public void notifyError(VolleyError error) {
-                            Toast.makeText(v.getContext(), "Cannot find device", Toast.LENGTH_LONG).show();
+                            Toast.makeText(v.getContext(), "cannot connect to device", Toast.LENGTH_LONG).show();
                         }
                     };
 
                     ConnectToServer cnt = new ConnectToServer(v.getContext());
-                    cnt.getResponse(ip, mResultCallback);
+                    cnt.getResponseFullURL(ip, mResultCallback);
 
                 } catch (JSONException e) {
                     Toast.makeText(v.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
