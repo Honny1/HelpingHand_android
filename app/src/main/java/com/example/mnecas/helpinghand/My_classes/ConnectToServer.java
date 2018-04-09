@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by mnecas on 5.2.18.
+ * Created by mnecas on 5.2.18.ll
  */
 
 public class ConnectToServer extends AppCompatActivity {
@@ -37,7 +37,7 @@ public class ConnectToServer extends AppCompatActivity {
     public Map<String, String> map;
 
     public ConnectToServer(Context context) {
-        this.url = "http://192.168.2.109:8000";
+        this.url = "http://10.0.1.59:8000";
         map= new HashMap<String, String>();
         this.my_response = "";
         this.mContext = context;
