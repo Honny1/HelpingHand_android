@@ -2,15 +2,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
-        <!-- colorPrimary is used for coloring the Toolbar -->
-        <item name="colorPrimary">#680010</item>
-        <!-- colorPrimaryDark is used for coloring the status bar -->
-        <item name="colorPrimaryDark">#64000F</item>
-        <!-- colorAccent is used as the default value for colorControlActivated
-             which is used to tint widgets -->
-        <item name="colorAccent">#730012</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorTopBar</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -27,4 +22,10 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
+    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
 </resources>
